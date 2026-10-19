@@ -7,7 +7,9 @@ public class Solution {
         int b = sc.nextInt();
         
         if(Math.abs(a)<=100 && Math.abs(b)<=100) {
-            System.out.println(a+" + "+b+" = "+(a+b));
+            System.out.printf("%d + %d = %d", a, b, a+b);
         }
+        
+        sc.close();
     }
 }
