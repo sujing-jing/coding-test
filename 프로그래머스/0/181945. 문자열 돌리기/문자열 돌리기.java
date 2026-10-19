@@ -6,8 +6,8 @@ public class Solution {
         String str = sc.next();
         
         if(Math.abs(str.length())<=10) {
-            for(int i=0;i<str.length();i++) {
-                System.out.println(str.charAt(i));
+            for(char a : str.toCharArray()) {
+                System.out.println(a);
             }
         }
         
