@@ -1,45 +1,46 @@
 class Solution {
-    public int solution(int[][] signals) {
-        long lcm = 1;
-
-        // 모든 신호등 주기의 최소공배수 구하기
-        for (int[] s : signals) {
-            int period = s[0] + s[1] + s[2];
-            lcm = lcm / gcd(lcm, period) * period;
-        }
-
-        // 1초부터 모든 신호등이 노란불인지 확인
-        for (long t = 1; t <= lcm; t++) {
-            boolean allYellow = true;
-
-            for (int[] s : signals) {
-                int green = s[0];
-                int yellow = s[1];
-                int period = s[0] + s[1] + s[2];
-
-                long phase = (t - 1) % period;
-
-                if (phase < green || phase >= green + yellow) {
-                    allYellow = false;
-                    break;
-                }
-            }
-
-            if (allYellow) {
-                return (int) t;
-            }
-        }
-
-        return -1;
-    }
-
-    // 최대공약수
-    private long gcd(long a, long b) {
-        while (b != 0) {
-            long temp = a % b;
-            a = b;
-            b = temp;
+    public int gcd(int a, int b) {
+        while(b != 0) {
+            int temp = b;
+            b = a % b;
+            a = temp;
         }
         return a;
+    }
+    
+    public int lcm(int a, int b) {
+        return a / gcd(a, b) * b;
+    }
+    
+    public boolean isYellow(int sec, int[] signal) {
+        sec = sec % (signal[0] + signal[1] + signal[2]);
+        return sec > signal[0] && sec <= signal[0] + signal[1];
+    }
+    
+    public int solution(int[][] signals) {
+        int answer = 0;
+        
+        int max = 1;
+        
+        for(int[] signal : signals) {
+            int period = signal[0] + signal[1] + signal[2];
+            max = lcm(max, period);
+        }
+        
+        while (answer <= max) {
+            boolean flag = true;
+            
+            for(int[] signal : signals) {
+                flag = flag && isYellow(answer, signal);
+            }
+            
+            if (flag) {
+                return answer;
+            }
+            
+            answer++;
+        }
+        
+        return -1;
     }
 }
