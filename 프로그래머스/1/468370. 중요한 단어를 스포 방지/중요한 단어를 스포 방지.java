@@ -1,4 +1,3 @@
-
 import java.util.*;
 
 class Solution {
@@ -6,7 +5,7 @@ class Solution {
         int n = message.length();
         boolean[] spoiler = new boolean[n];
 
-        // 1. 스포 방지 구간에 포함된 문자 표시
+        // 1. 스포일러 구간에 포함된 문자 표시
         for (int[] range : spoiler_ranges) {
             for (int i = range[0]; i <= range[1]; i++) {
                 spoiler[i] = true;
@@ -14,9 +13,9 @@ class Solution {
         }
 
         Set<String> normalWords = new HashSet<>();
-        List<String> spoilerWords = new ArrayList<>();
+        Set<String> spoilerWords = new HashSet<>();
 
-        // 2. 단어별로 스포 방지 여부 확인
+        // 2. 단어별로 스포일러 여부 확인
         int i = 0;
 
         while (i < n) {
@@ -45,16 +44,10 @@ class Solution {
             i++; // 공백 건너뛰기
         }
 
-        // 3. 중요한 단어 개수 계산
-        Set<String> seen = new HashSet<>();
-        int answer = 0;
+        // 3. 일반 단어에 존재하는 단어 제거
+        spoilerWords.removeAll(normalWords);
 
-        for (String word : spoilerWords) {
-            if (!normalWords.contains(word) && seen.add(word)) {
-                answer++;
-            }
-        }
-
-        return answer;
+        // 4. 남은 서로 다른 스포일러 단어 개수 반환
+        return spoilerWords.size();
     }
 }
