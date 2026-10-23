@@ -1,6 +1,6 @@
 import java.util.ArrayDeque;
 import java.util.Deque;
-import java.util.Arrays;
+// import java.util.Arrays;
 
 class Solution {
     public int[] solution(int m, int n, int h, int w, int[][] drops) {
@@ -9,15 +9,15 @@ class Solution {
 
         // 1. 각 칸에 처음 비가 내리는 시점 기록
         // 비가 오지 않는 칸은 len + 1
-        // for (int r = 0; r < m; r++) {
-        //     for (int c = 0; c < n; c++) {
-        //         rain[r][c] = len + 1;
-        //     }
-        // }
-        
-        for (int[] tmp : rain) {
-            Arrays.fill(tmp, len+1);
+        for (int r = 0; r < m; r++) {
+            for (int c = 0; c < n; c++) {
+                rain[r][c] = len + 1;
+            }
         }
+        
+        // for (int[] tmp : rain) {
+        //     Arrays.fill(tmp, len+1);
+        // }
 
         for (int i = 0; i < len; i++) {
             int r = drops[i][0];
