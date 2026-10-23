@@ -39,13 +39,11 @@ class Solution {
     }
     
     public int plustime(int time) {
-        int min = min(time) + 10;
-        int hour = hour(time);
-        if(min>=60){
-            min %= 60;
-            hour++;
+        time += 10;
+        if(time%100 >= 60){
+            time += 40;
         }
-        return 100*hour + min;
+        return time;
     }
     
 }
