@@ -14,10 +14,6 @@ class Solution {
             answer[j] = narr[cmd[2]-1];
             j++;
         }
-        
-        
-        
-        
         return answer;
     }
 }
