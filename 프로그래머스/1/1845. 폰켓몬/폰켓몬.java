@@ -6,16 +6,16 @@ class Solution {
         
         int getp = nums.length/2;
         
-        Set<Integer> list = new HashSet<>();
+        Map<Integer, Integer> map = new HashMap<>();
         
         for(int type : nums) {
-            list.add(type);
+            map.put(type, map.getOrDefault(nums, 0) + 1);
         }
         
-        if(list.size()>=getp) {
+        if(map.size()>=getp) {
             answer = getp;
         } else {
-            answer = list.size();
+            answer = map.size();
         }
         
         return answer;
